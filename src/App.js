@@ -1,11 +1,24 @@
-import React from "react"
-// import Home from "./pages/home/Home.jsx";
-import Profile from "./pages/profile/Profile.jsx";
-// import Login from "./pages/login/Login.jsx";
-// import Register from "./pages/register/Register.jsx";
+import React, { useEffect } from "react"
+import MLPresentation from "./components/MLPresentation.jsx";
 
 function App() {
-  return <Profile/>
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      const prevButton = document.querySelector('.nav-button:first-of-type');
+      const nextButton = document.querySelector('.nav-button:last-of-type');
+      
+      if (e.key === 'ArrowLeft' && prevButton && !prevButton.disabled) {
+        prevButton.click();
+      } else if (e.key === 'ArrowRight' && nextButton && !nextButton.disabled) {
+        nextButton.click();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  return <MLPresentation/>
 }
 
 export default App;
